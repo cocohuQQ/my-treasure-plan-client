@@ -1,0 +1,40 @@
+<nz-layout>
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+    <div class="logo">LeLe's Home</div>
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <li nz-submenu nzTitle="试算" nzIcon="calculator">
+        <ul>
+          <li nz-menu-item> <a routerLink="/analog-calculator-yield" routerLinkActive="active">收益率试算</a></li>
+        </ul>
+      </li>  <li nz-submenu nzTitle="资产" nzIcon="money-collect">
+        <ul>
+          <li nz-menu-item> <a routerLink="/money-collect-overview" routerLinkActive="active">概览</a></li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="流水" nzIcon="history">
+        <ul>
+          <li nz-menu-item> <a routerLink="/income-expenses-view" routerLinkActive="active">收支明细</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <i
+        class="trigger"
+        nz-icon
+        [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+        (click)="isCollapsed = !isCollapsed"
+      ></i>
+    </nz-header>
+    <nz-content>
+      <nz-breadcrumb>
+        <nz-breadcrumb-item>{{title}}</nz-breadcrumb-item>
+      </nz-breadcrumb>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+    <nz-footer>Treasure ©2020 Implement By Coco</nz-footer>
+  </nz-layout>
+</nz-layout>
