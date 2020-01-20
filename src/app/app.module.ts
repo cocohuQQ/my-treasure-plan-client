@@ -14,6 +14,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MoneyCollectOverviewComponent } from './money-collect-overview/money-collect-overview.component';
 import { AnalogCalculatorYieldComponent } from './analog-calculator-yield/analog-calculator-yield.component';
 import { IncomeExpensesViewComponent } from './income-expenses-view/income-expenses-view.component';
+import {NgxEchartsModule} from 'ngx-echarts';
 
 registerLocaleData(zh);
 
@@ -42,7 +43,8 @@ const appRoutes: Routes = [
     NgZorroAntdModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxEchartsModule
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]

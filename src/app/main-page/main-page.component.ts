@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: 'app-main-page',

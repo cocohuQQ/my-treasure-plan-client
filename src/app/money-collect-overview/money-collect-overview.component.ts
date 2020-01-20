@@ -1,5 +1,8 @@
+
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as echarts from 'echarts';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-money-collect-overview',
@@ -7,38 +10,58 @@ import * as echarts from 'echarts';
   styleUrls: ['./money-collect-overview.component.css']
 })
 export class MoneyCollectOverviewComponent implements OnInit {
+  @ViewChild('myCharts', { static: true }) myCharts: ElementRef;
 
-  @ViewChild('myCharts', {static : true}) myCharts: ElementRef;
+  assetsByPeopleOptions: any;
 
-  options: any;
-
-  constructor() { }
+  constructor(private httpClient: HttpClient) {}
 
   ngOnInit() {
-    const myChart = echarts.init(this.myCharts.nativeElement);
+    this.httpClient
+      .post(environment.TreasureBaseUrl + 'assetsAllocation/groupByPeople', {}, {})
+      .subscribe((returnData: Array<any>) => {
+        if (!returnData) {
+          return;
+        }
+        const dataName = [];
+        const dataValue = [];
+        returnData.forEach(element => {
+          const nameVal = element.name + '-' + (element.value / 10000) + 'w';
+          dataName.push(nameVal);
+          dataValue.push({ value: element.value, name: nameVal });
+        });
 
-        // 指定图表的配置项和数据
-    const option = {
-            title: {
-                text: 'ECharts 入门示例'
-            },
-            tooltip: {},
-            legend: {
-                data: ['销量']
-            },
-            xAxis: {
-                data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
-            },
-            yAxis: {},
-            series: [{
-                name: '销量',
-                type: 'bar',
-                data: [5, 20, 36, 10, 10, 20]
-            }]
+        this.assetsByPeopleOptions = {
+          title: {
+            text: '最新资产比例',
+            left: 'center'
+          },
+          tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b} : {c} ({d}%)'
+          },
+          legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: dataName
+          },
+          series: [
+            {
+              name: '金额(元)',
+              type: 'pie',
+              radius: '55%',
+              center: ['50%', '60%'],
+              data: dataValue,
+              emphasis: {
+                itemStyle: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+              }
+            }
+          ]
         };
-
-        // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
+      });
   }
-
 }
