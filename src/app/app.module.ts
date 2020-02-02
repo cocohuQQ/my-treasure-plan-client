@@ -15,11 +15,13 @@ import { MoneyCollectOverviewComponent } from './money-collect-overview/money-co
 import { AnalogCalculatorYieldComponent } from './analog-calculator-yield/analog-calculator-yield.component';
 import { IncomeExpensesViewComponent } from './income-expenses-view/income-expenses-view.component';
 import {NgxEchartsModule} from 'ngx-echarts';
+import { MoneyChangeCurveComponent } from './money-change-curve/money-change-curve.component';
 
 registerLocaleData(zh);
 
 const appRoutes: Routes = [
   { path: 'money-collect-overview', component: MoneyCollectOverviewComponent , data: { title: '资产概览' } },
+  { path: 'money-change-curve', component: MoneyChangeCurveComponent , data: { title: '资产轨迹' } },
   { path: 'analog-calculator-yield', component: AnalogCalculatorYieldComponent, data: { title: '收益率试算' } },
   { path: 'income-expenses-view', component: IncomeExpensesViewComponent , data: { title: '收支明细' } },
   { path: '**', component: IncomeExpensesViewComponent, data: { title: '收益率试算' } }
@@ -31,7 +33,8 @@ const appRoutes: Routes = [
     MainPageComponent,
     MoneyCollectOverviewComponent,
     AnalogCalculatorYieldComponent,
-    IncomeExpensesViewComponent
+    IncomeExpensesViewComponent,
+    MoneyChangeCurveComponent
   ],
   imports: [
     RouterModule.forRoot(
