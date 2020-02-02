@@ -1,1 +1,10 @@
-<div echarts [options]= "assetsByPeopleOptions" style="height:350px; width:350px"></div>
+<div class = "display-flex">
+  <div echarts [options]= "assetsByPeopleOptions" style="height:300px; width:380px"></div>
+  <div echarts [options]= "assetsByType" style="height:300px; width:500px"></div>
+</div>
+<div class = "display-flex">
+  <div class = "inline-div" echarts [options]= "assetsByTypeForKeKe"></div>
+  <div class = "inline-div" echarts [options]= "assetsByTypeForMM"></div>
+  <div class = "inline-div" echarts [options]= "assetsByTypeForGM"></div>
+</div>
+

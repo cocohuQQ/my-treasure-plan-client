@@ -22,7 +22,7 @@ const appRoutes: Routes = [
   { path: 'money-collect-overview', component: MoneyCollectOverviewComponent , data: { title: '资产概览' } },
   { path: 'analog-calculator-yield', component: AnalogCalculatorYieldComponent, data: { title: '收益率试算' } },
   { path: 'income-expenses-view', component: IncomeExpensesViewComponent , data: { title: '收支明细' } },
-  { path: '**', component: AnalogCalculatorYieldComponent, data: { title: '收益率试算' } }
+  { path: '**', component: IncomeExpensesViewComponent, data: { title: '收益率试算' } }
 ];
 
 @NgModule({

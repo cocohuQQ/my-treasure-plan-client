@@ -1,0 +1,8 @@
+.inline-div{
+  height:220px;
+  width:320px;
+  margin : 10px;
+}
+.display-flex{
+  display: flex;
+}
