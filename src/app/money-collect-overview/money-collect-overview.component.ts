@@ -1,6 +1,5 @@
 
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import * as echarts from 'echarts';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
@@ -10,7 +9,6 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./money-collect-overview.component.css']
 })
 export class MoneyCollectOverviewComponent implements OnInit {
-  @ViewChild('myCharts', { static: true }) myCharts: ElementRef;
 
   assetsByPeopleOptions: any;
 
