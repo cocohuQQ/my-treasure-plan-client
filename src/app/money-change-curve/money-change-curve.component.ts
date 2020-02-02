@@ -9,6 +9,8 @@ import { environment } from 'src/environments/environment';
 })
 export class MoneyChangeCurveComponent implements OnInit {
 
+  assetsChangeCurveForEveryOne: any;
+
   assetsChangeCurve: any;
 
   assetsChangeCurveForGM: any;
@@ -20,6 +22,51 @@ export class MoneyChangeCurveComponent implements OnInit {
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
+
+    this.httpClient.post(environment.TreasureBaseUrl + 'assetsAllocation/changeCurveForEveryOne', {}, {})
+      .subscribe((returnData: Array<any>) => {
+        if (!returnData && !returnData.datas) {
+          return;
+        }
+        const seriesVal = [];
+        // tslint:disable-next-line:forin
+        for (const key in returnData.datas) {
+          seriesVal.push({
+            name: key,
+            type: 'line',
+            data: returnData.datas[key]
+          });
+        }
+        this.assetsChangeCurveForEveryOne = {
+          title: {
+              text: '各人总资产趋势图'
+          },
+          tooltip: {
+              trigger: 'axis'
+          },
+          legend: {
+              data: returnData.names,
+              top: 30
+          },
+          grid: {
+              left: '3%',
+              right: '4%',
+              bottom: '3%',
+              top: '20%',
+              containLabel: true
+          },
+          xAxis: {
+              type: 'category',
+              boundaryGap: false,
+              data: returnData.dates
+          },
+          yAxis: {
+              type: 'value'
+          },
+          series: seriesVal
+      };
+      });
+
     this.httpClient.post(environment.TreasureBaseUrl + 'assetsAllocation/changeCurve', {}, {})
       .subscribe((returnData: Array<any>) => {
         if (!returnData && !returnData.datas) {
@@ -36,7 +83,7 @@ export class MoneyChangeCurveComponent implements OnInit {
         }
         this.assetsChangeCurve = {
           title: {
-              text: '总资产趋势图'
+              text: '各类资产汇总趋势图'
           },
           tooltip: {
               trigger: 'axis'
@@ -80,7 +127,7 @@ export class MoneyChangeCurveComponent implements OnInit {
         }
         this.assetsChangeCurveForKeKe = {
           title: {
-              text: '可可资产趋势图'
+              text: '可可各类资产趋势图'
           },
           tooltip: {
               trigger: 'axis'
@@ -124,7 +171,7 @@ export class MoneyChangeCurveComponent implements OnInit {
         }
         this.assetsChangeCurveForMM = {
           title: {
-              text: '妈妈资产趋势图'
+              text: '妈妈各类资产趋势图'
           },
           tooltip: {
               trigger: 'axis'
@@ -168,7 +215,7 @@ export class MoneyChangeCurveComponent implements OnInit {
         }
         this.assetsChangeCurveForGM = {
           title: {
-              text: '外婆资产趋势图'
+              text: '外婆各类资产趋势图'
           },
           tooltip: {
               trigger: 'axis'
