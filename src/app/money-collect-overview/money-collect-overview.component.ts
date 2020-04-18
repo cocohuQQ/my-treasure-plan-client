@@ -18,6 +18,8 @@ export class MoneyCollectOverviewComponent implements OnInit {
 
   assetsByTypeForMM: any;
 
+  assetsByTypeForBB: any;
+
   assetsByTypeForGM: any;
 
   constructor(private httpClient: HttpClient) {}
@@ -216,6 +218,56 @@ export class MoneyCollectOverviewComponent implements OnInit {
       ]
     };
    });
+
+    this.httpClient.post(environment.TreasureBaseUrl + '/assetsAllocation/groupByType/4', {}, {})
+   .subscribe((returnData: Array<any>) => {
+    if (!returnData) {
+      return;
+    }
+    const dataName = [];
+    const dataValue = [];
+    let sumVal = 0;
+    returnData.forEach(element => {
+      const nameVal = element.assetsTypeDes + '-' + (element.value / 10000) + 'w';
+      dataName.push(nameVal);
+      dataValue.push({ value: element.value, name: nameVal });
+      sumVal += element.value;
+    });
+
+    this.assetsByTypeForBB = {
+      title: {
+        text: '爸爸的最新资产分类'+ ( sumVal / 10000) + 'w',
+        left: 'center'
+      },
+      tooltip: {
+        trigger: 'item',
+        formatter: '{a} <br/>{b} : {c} ({d}%)'
+      },
+      legend: {
+        orient: 'vertical',
+        left: 'left',
+        top: 30,
+        data: dataName
+      },
+      series: [
+        {
+          name: '金额(元)',
+          type: 'pie',
+          radius: '55%',
+          center: ['50%', '60%'],
+          data: dataValue,
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
+        }
+      ]
+    };
+   });
+
 
 
     this.httpClient.post(environment.TreasureBaseUrl + '/assetsAllocation/groupByType/3', {}, {})
