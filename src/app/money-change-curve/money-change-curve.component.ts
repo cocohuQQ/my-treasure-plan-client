@@ -26,7 +26,7 @@ export class MoneyChangeCurveComponent implements OnInit {
   ngOnInit() {
 
     this.httpClient.post(environment.TreasureBaseUrl + 'assetsAllocation/changeCurveForEveryOne', {}, {})
-      .subscribe((returnData: Array<any>) => {
+      .subscribe((returnData: any) => {
         if (!returnData && !returnData.datas) {
           return;
         }
@@ -70,7 +70,7 @@ export class MoneyChangeCurveComponent implements OnInit {
       });
 
     this.httpClient.post(environment.TreasureBaseUrl + 'assetsAllocation/changeCurve', {}, {})
-      .subscribe((returnData: Array<any>) => {
+      .subscribe((returnData: any) => {
         if (!returnData && !returnData.datas) {
           return;
         }
@@ -114,7 +114,7 @@ export class MoneyChangeCurveComponent implements OnInit {
       });
 
     this.httpClient.post(environment.TreasureBaseUrl + 'assetsAllocation/changeCurve/1', {}, {})
-      .subscribe((returnData: Array<any>) => {
+      .subscribe((returnData: any) => {
         if (!returnData && !returnData.datas) {
           return;
         }
@@ -158,7 +158,7 @@ export class MoneyChangeCurveComponent implements OnInit {
       });
 
     this.httpClient.post(environment.TreasureBaseUrl + 'assetsAllocation/changeCurve/2', {}, {})
-      .subscribe((returnData: Array<any>) => {
+      .subscribe((returnData: any) => {
         if (!returnData && !returnData.datas) {
           return;
         }
@@ -202,7 +202,7 @@ export class MoneyChangeCurveComponent implements OnInit {
       });
 
     this.httpClient.post(environment.TreasureBaseUrl + 'assetsAllocation/changeCurve/4', {}, {})
-      .subscribe((returnData: Array<any>) => {
+      .subscribe((returnData: any) => {
         if (!returnData && !returnData.datas) {
           return;
         }
@@ -246,7 +246,7 @@ export class MoneyChangeCurveComponent implements OnInit {
       });
 
     this.httpClient.post(environment.TreasureBaseUrl + 'assetsAllocation/changeCurve/3', {}, {})
-      .subscribe((returnData: Array<any>) => {
+      .subscribe((returnData: any) => {
         if (!returnData && !returnData.datas) {
           return;
         }
