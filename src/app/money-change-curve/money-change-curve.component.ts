@@ -19,6 +19,8 @@ export class MoneyChangeCurveComponent implements OnInit {
 
   assetsChangeCurveForMM: any;
 
+  assetsChangeCurveForBB: any;
+
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
@@ -199,6 +201,50 @@ export class MoneyChangeCurveComponent implements OnInit {
       };
       });
 
+    this.httpClient.post(environment.TreasureBaseUrl + 'assetsAllocation/changeCurve/4', {}, {})
+      .subscribe((returnData: Array<any>) => {
+        if (!returnData && !returnData.datas) {
+          return;
+        }
+        const seriesVal = [];
+        // tslint:disable-next-line:forin
+        for (const key in returnData.datas) {
+          seriesVal.push({
+            name: key,
+            type: 'line',
+            data: returnData.datas[key]
+          });
+        }
+        this.assetsChangeCurveForBB = {
+          title: {
+              text: '爸爸各类资产趋势图'
+          },
+          tooltip: {
+              trigger: 'axis'
+          },
+          legend: {
+              data: returnData.types,
+              top: 30
+          },
+          grid: {
+              left: '3%',
+              right: '4%',
+              bottom: '3%',
+              top: '20%',
+              containLabel: true
+          },
+          xAxis: {
+              type: 'category',
+              boundaryGap: false,
+              data: returnData.dates
+          },
+          yAxis: {
+              type: 'value'
+          },
+          series: seriesVal
+      };
+      });
+
     this.httpClient.post(environment.TreasureBaseUrl + 'assetsAllocation/changeCurve/3', {}, {})
       .subscribe((returnData: Array<any>) => {
         if (!returnData && !returnData.datas) {
@@ -242,6 +288,7 @@ export class MoneyChangeCurveComponent implements OnInit {
           series: seriesVal
       };
       });
+
   }
 
 }
