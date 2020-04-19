@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
-import { FormsModule } from '@angular/forms';
+import { NgZorroAntdModule, NZ_I18N, zh_CN, NzFormModule } from 'ng-zorro-antd';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
@@ -16,6 +16,7 @@ import { AnalogCalculatorYieldComponent } from './analog-calculator-yield/analog
 import { IncomeExpensesViewComponent } from './income-expenses-view/income-expenses-view.component';
 import {NgxEchartsModule} from 'ngx-echarts';
 import { MoneyChangeCurveComponent } from './money-change-curve/money-change-curve.component';
+import { MoneyAssertRegComponent } from './money-assert-reg/money-assert-reg.component';
 
 registerLocaleData(zh);
 
@@ -24,6 +25,7 @@ const appRoutes: Routes = [
   { path: 'money-change-curve', component: MoneyChangeCurveComponent , data: { title: '资产轨迹' } },
   { path: 'analog-calculator-yield', component: AnalogCalculatorYieldComponent, data: { title: '收益率试算' } },
   { path: 'income-expenses-view', component: IncomeExpensesViewComponent , data: { title: '收支明细' } },
+  { path: 'money-assert_reg', component: MoneyAssertRegComponent , data: { title: '资产登记' } },
   { path: '**', component: IncomeExpensesViewComponent, data: { title: '收益率试算' } }
 ];
 
@@ -34,7 +36,8 @@ const appRoutes: Routes = [
     MoneyCollectOverviewComponent,
     AnalogCalculatorYieldComponent,
     IncomeExpensesViewComponent,
-    MoneyChangeCurveComponent
+    MoneyChangeCurveComponent,
+    MoneyAssertRegComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -43,11 +46,13 @@ const appRoutes: Routes = [
     ),
     BrowserModule,
     AppRoutingModule,
-    NgZorroAntdModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgxEchartsModule
+    NgxEchartsModule,
+    NgZorroAntdModule,
+    NzFormModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]

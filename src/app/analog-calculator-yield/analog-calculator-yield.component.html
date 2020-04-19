@@ -1,1 +1,22 @@
-<p>analog-calculator-yield works!</p>
+<form nz-form [nzLayout]="'inline'" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your minExpectRate!">
+      <input type="number" nz-input placeholder="最小期望收益率" formControlName="minExpectRate" style="width:150px; text-align: center;" />
+      <input type="text"  disabled nz-input placeholder="~" style="width: 30px; border-left: 0px; pointer-events: none; background-color: rgb(255, 255, 255);" />
+      <input type="number" nz-input placeholder="最大期望收益率" formControlName="maxExpectRate" style="width: 150px; text-align: center; border-left: 0px;" />
+      </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your money!">
+        <input type="number" nz-input formControlName="money" placeholder="金额"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <button nz-button nzType="primary" [disabled]="!validateForm.valid">计算</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+<div  echarts [options]= "calResultCurve"></div>
+
+
