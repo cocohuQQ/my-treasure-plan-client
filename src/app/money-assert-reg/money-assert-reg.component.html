@@ -1,1 +1,19 @@
-<p>money-assert-reg works!</p>
+<nz-tabset>
+
+  <nz-tab *ngFor = "let tabTitle of tabsTitle let i = index" nzTitle = "{{tabTitle}}">
+
+    <form nz-form  [formGroup]="validateForms[i]" >
+
+      <nz-form-item *ngFor = "let items of itemsComponentForAllTab[i] let j = index" >
+        <nz-form-label nzRequired nzFor="{{items.formControlName}}">{{items.lableTxt}}</nz-form-label>
+        <nz-form-control nzErrorTip="The input is not valid money!">
+          <input nz-input formControlName="{{items.formControlName}}" />
+        </nz-form-control>
+      </nz-form-item>
+
+  </form>
+
+
+  </nz-tab>
+
+</nz-tabset>
